@@ -1,0 +1,31 @@
+﻿@using TankLibrary.Domain.Concrete
+@model TankLibrary.Domain.Entities.Tank
+
+<div>
+    <h4>@Model.Name</h4>
+    <hr />
+    @{
+        var sImgSrc = Model.ImagePath + Model.ImageFile;
+        if (sImgSrc != null && sImgSrc != "")
+        {
+            <img class="imgdetail imgfloatright" src="@sImgSrc" />
+        }
+    }
+    <dl class="dl-horizontal">
+        @foreach (var p in ViewData.ModelMetadata.Properties)
+            {
+                if (p.PropertyName == "Stage")
+                {
+                <dt>@(p.DisplayName ?? p.PropertyName)</dt>
+                <dd>@(Consts.GetStage((int?)p.Model))</dd>
+            }
+            else if (p.PropertyName != "Id" && p.PropertyName != "ImagePath" && p.PropertyName != "ImageFile")
+            {
+                <dt>@(p.DisplayName ?? p.PropertyName)</dt>
+                <dd>@(p.Model == null ? "" : p.Model.ToString())</dd>
+            }
+        }
+    </dl>
+</div>
+
+

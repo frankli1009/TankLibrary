@@ -1,0 +1,415 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/* Apply a natural box model layout to all elements */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* clearfix: Force an element not to collapse */
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.clearboth {
+    display:block;
+    clear:both;
+}
+
+/* All images, video and table set to 100% width of their parent container */
+img, video, table {
+    width: 100%;
+}
+
+body {
+    font-family: 'Ek Mukta', sans-serif;
+    font-size: 16px;
+    color: #444;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    width:98%;
+    max-width:none;
+}
+
+.homebg {
+    position: relative;
+    width: 100%;
+    /*height: 40vh;*/
+
+    /*background-image: url(images/tank_title_bg.jpg);
+    background-position:center 0;
+    background-attachment:fixed;
+    background-size:cover;
+    background-repeat:no-repeat;*/
+
+    border-bottom: 5px solid rgba(177, 180, 181, 0.8); 
+}
+
+.titleimgdiv{
+    width: 100%;
+}
+
+.logo {
+    position: absolute;
+    top: 45px;
+    left: 25px;
+    width: 90px;
+    z-index: 110;
+}
+
+.well {
+    padding: 10px !important;
+}
+
+.titleimgdiv {
+    width: 100%;
+}
+
+.titleimg {
+    width: 100%;
+    height: 35vh;
+}
+
+.col-xs-12 {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    /*border: 1px solid #dddddd;*/
+    border-collapse:collapse;
+    font-size: 10px;
+}
+
+.table-responsive th, .table-responsive td {
+    white-space:nowrap;
+    text-wrap:none;
+    border:1px solid #dddddd;
+}
+
+/* fix one functional column on small screen */
+.table > thead:first-child > tr:first-child > th:first-child {
+    position: absolute;
+    display: inline-block;
+    text-align:center;
+    /*background-color: rgba(240, 240, 240, 1);*/
+    background-color: rgba(248, 248, 248, 1);
+}
+
+.table > tbody > tr > td:first-child {
+    position: absolute;
+    display: inline-block;
+    text-align:center;
+    /*background-color: rgba(240, 240, 240, 1);*/
+    background-color: rgba(248, 248, 248, 1);
+}
+
+.table > thead:first-child > tr:first-child > th:first-child {
+    min-width:70px;
+}
+
+.table > tbody > tr > td:first-child {
+    min-width: 70px;
+}
+
+.table > thead:first-child > tr:first-child > th:nth-child(2) {
+    padding-left: 80px;
+}
+
+.table > tbody > tr > td:nth-child(2) {
+    padding-left: 80px;
+}
+
+.pointercursor {
+    cursor: pointer;
+}
+
+.imgindex {
+    width: 260px;
+    /*height: 180px;*/
+}
+
+
+
+.imgfloatright {
+    /*float: right;*/
+    margin-left: 10px;
+}
+
+.col-centered{
+    /*margin: 0 auto;
+    float: none;*/
+}
+
+/*.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, 
+.table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {*/
+.table thead > tr > th.btnplace, .table tbody > tr > th.btnplace, .table tfoot > tr > th.btnplace, 
+.table thead > tr > td.btnplace, .table tbody > tr > td.btnplace, .table tfoot > tr > td.btnplace {
+    padding: 6px 8px;
+}
+
+.fa {
+    font-size: 12px;
+}
+
+.imgdetail {
+    width: 260px;
+    height: 180px;
+}
+
+.imgedit {
+    border: 1px solid rgba(192, 192, 192, 1);
+    width: 260px;
+    height: 180px;
+}
+
+.field-validation-error { 
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error, .input-validation-error-custom {
+    border: 1px solid #f00 !important;
+    background-color: #fee !important;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+dt:nth-child(4n+1), dd:nth-child(4n+2) {
+    background-color: rgba(248, 248, 248, 1);
+}
+
+textarea.rows {
+    height: 7em;
+}
+
+.center_div{
+    margin: 0 auto;
+    width:80% /* value of your choice which suits your alignment */
+}
+
+.morebottom {
+    margin-bottom: 40px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+p.warning {
+    font-size: 12px;
+    color: #f00000;
+    padding-top: 1rem;
+}
+
+h3.warning {
+    color: #f00000;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+@media (max-width: 441px) {
+    .visible-xs.visible-xxs { 
+        display:block !important;
+    }
+
+    .visible-xs.hidden-xxs {
+        display:none !important;
+    }
+
+    .visible-xxs.hidden-xs.hidden-sm {
+        display:block !important;
+    }
+}
+
+/* consider of very small screen */
+@media screen and (min-width: 442px) {
+    .visible-xs.visible-xxs {
+        display:none !important;
+    }
+
+    .visible-xs.hidden-xxs {
+        display:block !important;
+    }
+
+    .imgdetail {
+        width: 300px;
+        height: 200px;
+    }
+
+    .imgedit {
+        border: 1px solid rgba(192, 192, 192, 1);
+        width: 300px;
+        height: 200px;
+    }
+
+    .imgindex {
+        width: 100%;
+        /*height: 220px;*/
+    }
+}
+
+@media screen and (min-width: 568px) {
+    .modal-content {
+        width: 454px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .visible-xs.visible-xxs {
+        display:none !important;
+    }
+
+    .visible-xs.hidden-xxs {
+        display:none !important;
+    }
+
+    .visible-xxs.hidden-xs.hidden-sm {
+        display:none !important;
+    }
+
+    .center_div{
+        width:100%;
+    }
+
+    .table-responsive {
+        font-size: 14px;
+    }
+
+    /* fix two columns (one functional column and one name column) on big screen */
+    .table > thead:first-child > tr:first-child > th:first-child, .table > thead:first-child > tr:first-child > th:nth-child(2) {
+        position: absolute;
+        display: inline-block;
+        text-align:center;
+        /*background-color: rgba(240, 240, 240, 1);*/
+        background-color: rgba(248, 248, 248, 1);
+    }
+
+    .table > tbody > tr > td:first-child, .table > tbody > tr > td:nth-child(2) {
+        position: absolute;
+        display: inline-block;
+        text-align:center;
+        /*background-color: rgba(240, 240, 240, 1);*/
+        background-color: rgba(248, 248, 248, 1);
+    }
+
+    .table > thead:first-child > tr:first-child > th:first-child {
+        min-width:70px;
+    }
+
+    .table > tbody > tr > td:first-child {
+        min-width: 70px;
+    }
+
+    .table > thead:first-child > tr:first-child > th:nth-child(2) {
+        margin-left: 70px;
+        padding-left: 8px !important;
+        min-width: 150px;
+    }
+
+    .table > tbody > tr > td:nth-child(2) {
+        margin-left: 70px !important;
+        padding-left: 8px !important;
+        min-width: 150px;
+    }
+
+    .table > thead:first-child > tr:first-child > th:nth-child(3) {
+        padding-left: 230px;
+    }
+
+    .table > tbody > tr > td:nth-child(3) {
+        padding-left: 230px !important;
+    }
+
+    .btn-lg {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .btn-lg {
+        font-size: 18px;
+    }
+}

@@ -1,0 +1,136 @@
+﻿@using TankLibrary.Domain.Concrete
+@model TankLibrary.Domain.Entities.Tank
+
+@{
+    var originalStage = ViewBag.CurrentStage;
+    var originalPage = ViewBag.CurrentPage;
+    var originalCurIndex = ViewBag.CurrentIndex;
+    var sOperation = (Model.Id == 0 ? "ADD" : "EDIT");
+
+    ViewBag.Title = sOperation;
+}
+<div class="col-xs-12 col-sm-12">
+    <h2 class="text-center">Tank Library - @sOperation</h2>
+    <hr />
+    <div class="container center_div">
+        @using (Html.BeginForm("Edit", "Home", new { liststage = originalStage, page = originalPage, curindex = originalCurIndex },
+                    FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "validateForm(event)" }))
+        {
+            <div class="form-group clearboth">
+                <div class="text-center">
+                    @Html.ActionLink("Back to List", "Index", "Home", new { stage = originalStage, page = originalPage, curindex = originalCurIndex }, new { @class = "btn btn-default" })
+                    <input type="submit" value="Save" class="btn btn-default btn-primary" />
+                </div>
+            </div>
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="row">
+                @foreach (var p in ViewData.ModelMetadata.Properties)
+                {
+                    switch (p.PropertyName)
+                    {
+                        case "Id":
+                        case "ImagePath":
+                        case "ImageFile":
+                        case "Armor":
+                        case "MainArmament":
+                        case "SecondaryArmament":
+                        case "Description":
+                            break;
+                        default:
+                            <div class="form-group col-xs-12 col-sm-6 col-md-4 col-centered">
+                                <label>@(p.DisplayName ?? p.PropertyName)</label>
+
+                                @if (p.PropertyName == "Stage")
+                                {
+                                    IEnumerable<SelectListItem> items = Consts.GetStagesSelectItems(Model.Stage);
+                                    @Html.DropDownList(p.PropertyName, items, "", new { @class = "form-control" })
+                                }
+                                @*else if (p.PropertyName == "Armor" || p.PropertyName == "MainArmament"
+                                        || p.PropertyName == "SecondaryArmament" || p.PropertyName == "Description")
+                                    {
+                                        @Html.TextArea(p.PropertyName, (p.Model == null ? "" : p.Model.ToString()), new { @class = "form-control rows" })
+                                    }*@
+                                else
+                                {
+                                    if (p.PropertyName == "Name")
+                                    {
+                                        @Html.TextBox(p.PropertyName, p.Model, new { @class = "form-control" }) @*, onchange = "validateForm(event)"*@
+                                        <span class="field-validation-valid text-danger" id="NameError"></span>
+                                     }
+                                    else if (p.ModelType.FullName.Contains("Decimal") || p.ModelType.FullName.Contains("Int16") || p.ModelType.FullName.Contains("Int32"))
+                                    {
+                                        @Html.TextBox(p.PropertyName, p.Model, new { @class = "form-control", type = "number" })
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBox(p.PropertyName, p.Model, new { @class = "form-control" })
+                                    }
+                                }
+
+                                @Html.ValidationMessage(p.PropertyName, new { @class = "text-danger" })
+                            </div>
+                            break;
+
+                    }
+                }
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-centered">
+                    @Html.LabelFor(tank => tank.Armor)
+                    @Html.TextAreaFor(tank => tank.Armor, new { @class = "form-control rows" })
+                    @Html.ValidationMessageFor(tank => tank.Armor, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-centered">
+                    @Html.LabelFor(tank => tank.MainArmament)
+                    @Html.TextAreaFor(tank => tank.MainArmament, new { @class = "form-control rows" })
+                    @Html.ValidationMessageFor(tank => tank.MainArmament, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-centered">
+                    @Html.LabelFor(tank => tank.SecondaryArmament)
+                    @Html.TextAreaFor(tank => tank.SecondaryArmament, new { @class = "form-control rows" })
+                    @Html.ValidationMessageFor(tank => tank.SecondaryArmament, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-centered">
+                    @Html.LabelFor(tank => tank.Description)
+                    @Html.TextAreaFor(tank => tank.Description, new { @class = "form-control rows" })
+                    @Html.ValidationMessageFor(tank => tank.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            var sHint = "Click the image to upload a new image";
+            var sImgSrc = Model.ImagePath + Model.ImageFile;
+            if (Model.ImageFile == null || Model.ImagePath == null || Model.ImageFile == "" || Model.ImagePath == "")
+            {
+                sHint = "Click the image area to add an image";
+                sImgSrc = "";
+            }
+            sImgSrc = (sImgSrc == "" ? "/Content/images/tank_no_image_baw.png" : sImgSrc);
+
+            <div class="row col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
+                @*add img element*@
+                <div class="form-group">
+                    <figure class="text-center">
+                        <figcaption><b>Image For Tank</b></figcaption>
+                        <img id="tankimg" class="imgedit pointercursor" src="@sImgSrc" title="@sHint" alt="Please click this image area to add a new image. (Image goes here...)" />
+                    </figure>
+                    <input type="file" style="display:none" accept=".png,.jpg,.gif" id="uploadimgfile" name="uploadimgfile" />
+                    @Html.HiddenFor(tank => tank.ImagePath)
+                    @Html.HiddenFor(tank => tank.ImageFile)
+                </div>
+            </div>
+
+            <div class="form-group clearboth">
+                <div class="text-center">
+                    @Html.ActionLink("Back to List", "Index", "Home", new { stage = originalStage, page = originalPage, curindex = originalCurIndex }, new { @class = "btn btn-default" })
+                    <input type="submit" value="Save" class="btn btn-default btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+    @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+    }
+
+</div>

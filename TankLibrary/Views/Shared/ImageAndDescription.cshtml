@@ -1,0 +1,16 @@
+﻿@using TankLibrary.HtmlHelpers
+@model TankLibrary.Domain.Entities.Tank
+
+@{
+    var sImgSrc = Model.ImagePath + Model.ImageFile;
+    sImgSrc = (sImgSrc == "" ? "/Content/images/tank_no_image_baw.png" : sImgSrc);
+}
+
+<div>
+    <img class="imgindex" src="@sImgSrc" alt="(Image of Tank)" />
+</div>
+<div>
+    @*@Model.Name*@
+    <h4 class="text-center" title="@sImgSrc">@Html.AdjustString(Model.Name, 21)</h4>
+    <p>@Model.Description</p>
+</div>

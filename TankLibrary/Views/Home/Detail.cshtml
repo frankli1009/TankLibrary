@@ -1,0 +1,24 @@
+﻿@using TankLibrary.Domain.Concrete
+@model TankLibrary.Domain.Entities.Tank
+
+@{
+    var originalStage = ViewBag.CurrentStage;
+    var originalPage = ViewBag.CurrentPage;
+    var originalCurIndex = ViewBag.CurrentIndex;
+    ViewBag.Title = "Detail - " + Model.Name;
+}
+
+<div class="col-xs-12 col-sm-12 text-center">
+    <h2>Tank Library - Detail</h2>
+    <div>
+        <div class="form-actions no-color morebottom">
+            @Html.ActionLink("Back to List", "Index", new { stage = originalStage, page = originalPage, curindex = originalCurIndex }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id, liststage = originalStage, page = originalPage, curindex = originalCurIndex }, new { @class = "btn btn-default btn-primary" })
+        </div>
+        @Html.Partial("TankDetail", Model)
+        <div class="form-actions no-color">
+            @Html.ActionLink("Back to List", "Index", new { stage = originalStage, page = originalPage, curindex = originalCurIndex }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id, liststage = originalStage, page = originalPage, curindex = originalCurIndex }, new { @class = "btn btn-default btn-primary" })
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<KeyValuePair<string, int>>
+
+@{
+    bool horizontal = ((bool)(ViewContext.RouteData.Values["horizontalLayout"] ?? false));
+    string wrapperClasses = horizontal ? "btn-group btn-group-sm btn-group-justified" : null;
+}
+
+<div class="@wrapperClasses">
+    @Html.ActionLink("All", "Index", "Home", null,
+        new
+        {
+            @class = (horizontal ? "btn btn-default btn-sm" : "btn btn-block btn-default btn-lg") +
+                (ViewBag.SelectedStage == null ? " btn-primary" : "")
+        })
+
+    @foreach (var stage in Model)
+    {
+        @Html.RouteLink(stage.Key, new
+   {
+       controller = "Home",
+       action = "Index",
+       stage = stage.Value,
+       page = 1
+   }, new
+   {
+       @class = (horizontal ? "btn btn-default btn-sm" : "btn btn-block btn-default btn-lg") +
+                (stage.Value == ViewBag.SelectedStage ? " btn-primary" : "")
+   })
+    }
+</div>

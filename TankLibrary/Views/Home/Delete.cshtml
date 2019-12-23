@@ -1,0 +1,64 @@
+﻿@using TankLibrary.Domain.Concrete
+@model TankLibrary.Domain.Entities.Tank
+
+@{
+    var originalStage = ViewBag.CurrentStage;
+    var originalPage = ViewBag.CurrentPage;
+    var originalCurIndex = ViewBag.CurrentIndex;
+    int defaultIdMax = ViewBag.DefaultIdMax;
+    ViewBag.Title = "Delete";
+}
+    <div class="col-xs-12 col-sm-12 text-center">
+        <h2>Tank Library - Delete</h2>
+        @if (Model.Id > defaultIdMax)
+        {
+            <h3>Are you sure you want to delete this tank?</h3>
+        }
+        else
+        {
+            <h3 class="warning">Sorry, this tank is a default one which can NOT be deleted.</h3>
+        }
+        <div>
+            @*@Html.Partial("TankDetail", Model)*@
+
+            @*<h4>Tank - @Model.Name</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                @foreach (var p in ViewData.ModelMetadata.Properties)
+                {
+                    if (p.PropertyName == "Stage")
+                    {
+                        <dt>@(p.DisplayName ?? p.PropertyName)</dt>
+                        <dd>@(Consts.GetStage((int?)p.Model))</dd>
+                    }
+                    else if (p.PropertyName != "Id" && p.PropertyName != "ImagePath" && p.PropertyName != "ImageFile")
+                    {
+                        <dt>@(p.DisplayName ?? p.PropertyName)</dt>
+                        <dd>@(p.Model == null ? "" : p.Model.ToString())</dd>
+                    }
+                }
+            </dl>*@
+            @using (Html.BeginForm(new { liststage = originalStage, page = originalPage, curindex = originalCurIndex }))
+            {
+                <div class="form-actions no-color morebottom">
+                    @Html.ActionLink("Back to List", "Index", new { stage = originalStage, page = originalPage, curindex = originalCurIndex }, new { @class = "btn btn-default" })
+                    @if (Model.Id > defaultIdMax)
+                    {
+                        <input type="submit" value="Delete" class="btn btn-default btn-primary" />
+                    }
+                </div>
+                @Html.Partial("TankDetail", Model)
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(tank => tank.Id)
+
+                <div class="form-actions no-color">
+                    @Html.ActionLink("Back to List", "Index", new { stage = originalStage, page = originalPage, curindex = originalCurIndex }, new { @class = "btn btn-default" })
+                    @if (Model.Id > defaultIdMax)
+                    {
+                        <input type="submit" value="Delete" class="btn btn-default btn-primary" />
+                    }
+                </div>
+            }
+        </div>
+    </div>

@@ -1,0 +1,107 @@
+﻿@{ 
+    int resetValue = Convert.ToInt32(ViewData["ShowReset"]);
+    string showReset = (resetValue !=  0) ? "true" : "false";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Tank Library</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+</head>
+<body>
+    <section id="home" class="homebg">
+        <div class="logo">
+            <img src="~/Content/images/logo2.png" alt="Tank Library logo" />
+        </div>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Tank Library", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="titleimgdiv visible-sm hidden-xs">
+            <img src="~/Content/images/tank_title_bg.jpg" alt="Tank war image" />
+        </div>
+        <div class="titleimgdiv hidden-lg hidden-md hidden-sm visible-xs">
+            <img src="~/Content/images/tank_title_sm.jpg" alt="Tank war image" />
+        </div>
+    </section>
+    <div class="container body-content">
+        <div class="row">
+            @RenderBody()
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Tank Library</p>
+        </footer>
+    </div>
+    <!-- The ResetData Modal -->
+    <div id="ResetData" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close btn-close">&times;</span>
+            @if (resetValue < 0)
+            {
+                <p>The records of the data have reached the maximum limitation, please click button "Reset Data" below and then retry the ADD function.</p>
+            }
+            else
+            {
+                <p>Data was successfully reset. Totally @resetValue @(resetValue > 1 ? "records" : "record") of the data @(resetValue > 1 ? "have" : "has") been removed.</p>
+            }
+            <div class="text-center">
+                @if (resetValue < 0)
+                {
+                    <a class="btn btn-default btn-warning btn-lg" href="@Url.Action("ResetData", "Home")">Reset Data</a>
+                }
+                else
+                {
+                    <a class="btn btn-default btn-lg btn-close" href="">Close</a>
+                }
+            </div>
+            @if (resetValue < 0)
+            {
+                <p class="warning">WARNING: After reset data, all data which is not default will be removed.</p>
+            }
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+        $(document).ready(() => {
+            console.log("@showReset");
+            if ("@showReset" === "true") {
+                console.log("@resetValue");
+                $("#ResetData").show();
+            }
+            $(".btn-close").click((e) => {
+                e.preventDefault();
+                $("#ResetData").hide();
+            });
+        });
+    </script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/myScript.js"></script>
+</body>
+</html>

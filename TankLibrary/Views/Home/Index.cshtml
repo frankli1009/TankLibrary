@@ -1,0 +1,105 @@
+﻿@using TankLibrary.HtmlHelpers
+@using TankLibrary.Domain.Concrete
+@using TankLibrary.Domain.Entities
+@model TankLibrary.Models.TankListViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+
+    int iIndex = -1;
+    int iSelId = 0;
+    Tank selTank = new Tank();
+}
+
+<div class="hidden-xs col-sm-2 col-md-2 well">
+    @Html.Action("Menu", "Nav", new { stage = Model.CurrentStage })
+</div>
+<div class="visible-xs visible-xxs">
+    @Html.Action("Menu", "Nav", new { stage = Model.CurrentStage, horizontalLayout = true, abbreviationsMenu = true })
+</div>
+<div class="visible-xs hidden-xxs">
+    @Html.Action("Menu", "Nav", new { stage = Model.CurrentStage, horizontalLayout = true })
+</div>
+<div class="col-xs-12 col-sm-10 col-md-7">
+
+    <div>
+        <div class="table-responsive table-bordered">
+            <table id="tanklist" class="table" data-fl-index="@Model.PageInfo.CurrentSelIndex">
+                <thead>
+                    <tr>
+                        <th class="text-center btnplace">
+                            <a class="btn btn-default btn-xs" href="@Url.Action("Edit", "Home", new { id = -1, liststage = Model.CurrentStage, page = Model.PageInfo.CurrentPage, curindex = Model.PageInfo.CurrentSelIndex })"><i class="fa fa-plus-square" title="ADD"></i></a>
+                            @*@Html.ActionLink("ADD", "Edit", "Home", new { id = -1, stage = Model.CurrentStage, page = Model.PageInfo.CurrentPage }, new { @class = "btn btn-block btn-default" })*@
+                        </th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Stage</th>
+                        <th class="text-center">Type</th>
+                        <th class="text-center">Place Of Origin</th>
+                        <th class="text-center">In Service</th>
+                        <th class="text-center">Crew</th>
+                        <th class="text-center">Weight</th>
+                        <th class="text-center">Power</th>
+                        <th class="text-center">Range</th>
+                        <th>Manufacturer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var tank in Model.Tanks)
+                    {
+                        iIndex++;
+                        var sStage = Consts.GetStage(@tank.Stage);
+                        int iStartYear = @tank.ServiceStartYear ?? 0;
+                        int iEndYear = @tank.ServiceEndYear ?? 0;
+                        string sInService = (iStartYear == 0 ? "" : iStartYear.ToString()) + "-" +
+                            (iEndYear == 0 ? "" : iEndYear.ToString());
+
+                        iSelId = (Model.PageInfo.CurrentSelIndex == iIndex ? tank.Id : iSelId);
+                        selTank = (Model.PageInfo.CurrentSelIndex == iIndex ? tank : selTank);
+                        string sClass = "clickable-row" + (Model.PageInfo.CurrentSelIndex == iIndex ? " active" : "");
+
+                        <tr class="@sClass" data-fl-index="@iIndex" data-fl-tankid="@tank.Id" data-fl-url="@Url.Action("ImgAndDesc", "Home", new { id = @tank.Id })">
+                            <td class="btnplace">
+                                <div class="btn-group">
+                                    <a class="btn btn-default btn-xs" href="@Url.Action("Edit", "Home", new { id = tank.Id, liststage = Model.CurrentStage, page = Model.PageInfo.CurrentPage, curindex = iIndex })"><i class="fa fa-edit" title="EDIT"></i></a>
+                                    <a class="btn btn-default btn-xs" href="@Url.Action("Delete", "Home", new { id = tank.Id, liststage = Model.CurrentStage, page = Model.PageInfo.CurrentPage, curindex = iIndex })"><i class="fa fa-trash" title="DELETE"></i></a>
+                                </div>
+                            </td>
+                            @*<td>@Html.ActionLink("EDIT", "Edit", "Home", new { id = tank.Id, stage = Model.CurrentStage, page = Model.PageInfo.CurrentPage }, new { @class = "btn btn-default" }) |
+                                @Html.ActionLink("DELETE", "Delete", "Home", new { id = tank.Id, stage = Model.CurrentStage, page = Model.PageInfo.CurrentPage }, new { @class = "btn btn-default" })</td>*@
+                            <td class="text-center">
+                                @Html.ActionLink(Html.AdjustString(tank.Name, 16),
+                           "Detail", "Home", new { id = tank.Id, liststage = Model.CurrentStage, page = Model.PageInfo.CurrentPage, curindex = iIndex },
+                           new { title = (tank.Name.Length <= 16 ? "DETAIL" : "DETAIL: " + tank.Name) })
+                        </td>
+                        <td class="text-center pointercursor">@sStage</td>
+                        <td class="text-center pointercursor">@tank.Type</td>
+                        <td class="text-center pointercursor">@tank.PlaceOfOrigin</td>
+                        <td class="text-center pointercursor">@sInService</td>
+                        <td class="text-center pointercursor">@tank.Crew</td>
+                        <td class="text-center pointercursor">@tank.Weight</td>
+                        <td class="text-center pointercursor">@tank.Power</td>
+                        <td class="text-center pointercursor">@tank.Range</td>
+                        <td class="pointercursor">@tank.Manufacturer</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+        <div class="hidden-xs hidden-xxs btn-group pull-right">
+            @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", "Home", new { page = x, stage = Model.CurrentStage, curindex = 0 }), 11)
+        </div>
+        <div class="visible-xs hidden-sm hidden-xxs btn-group pull-right">
+            @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", "Home", new { page = x, stage = Model.CurrentStage, curindex = 0 }), 7)
+        </div>
+        <div class="visible-xxs hidden-xs hidden-sm btn-group pull-right">
+            @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", "Home", new { page = x, stage = Model.CurrentStage, curindex = 0 }), 5)
+        </div>
+    </div>
+
+</div>
+<div class="hidden-xs hidden-sm col-md-3 well">
+    <div id="imganddesc_div">
+        @Html.Partial("ImageAndDescription", selTank)
+    </div>
+</div>
+
