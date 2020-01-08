@@ -399,6 +399,10 @@ button.navbar-toggler > .fa.fa-bars {
     padding: 1px 5px;
 }
 
+.navbar.custom-navbar:before, .navbar.custom-navbar:after {
+    content: none;
+}
+
 @media(min-width:768px) {
     .navbar-fixed-top, .navbar-fixed-bottom {
         border-radius: 0
