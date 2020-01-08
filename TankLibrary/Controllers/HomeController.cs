@@ -116,7 +116,7 @@ namespace TankLibrary.Controllers
             return PartialView("ImageAndDescription", tank);
         }
 
-        public ActionResult Detail(int? id, int? liststage, int page, int curindex)
+        public ActionResult Detail(int? id, int? liststage, int page, int curindex, bool fromEdit = false)
         {
             if (id == null)
             {
@@ -134,6 +134,8 @@ namespace TankLibrary.Controllers
             ViewBag.CurrentStage = liststage;
             ViewBag.CurrentPage = page;
             ViewBag.CurrentIndex = curindex;
+            ViewBag.DefaultIdMax = defaultIdMax;
+            ViewBag.FromEdit = fromEdit;
             return View(tank);
         }
 
@@ -166,6 +168,10 @@ namespace TankLibrary.Controllers
                 tank = tanks.ElementAt(0);
             }
 
+            if (tank.Id > 0 && tank.Id <= defaultIdMax)
+            {
+                return RedirectToAction("Detail", new { id = tank.Id, liststage = liststage, page = page, curindex = curindex, fromEdit = true });
+            }
             ViewBag.CurrentStage = liststage;
             ViewBag.CurrentPage = page;
             ViewBag.CurrentIndex = curindex;
