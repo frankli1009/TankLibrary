@@ -11,13 +11,15 @@
     Tank selTank = new Tank();
 }
 
-<div class="hidden-xs col-sm-2 col-md-2 well">
-    @Html.Action("Menu", "Nav", new { stage = Model.CurrentStage })
+<div class="stage d-none d-md-block col-sm-2 col-md-2">
+    <div class="well">
+        @Html.Action("Menu", "Nav", new { stage = Model.CurrentStage })
+    </div>
 </div>
-<div class="visible-xs visible-xxs">
+<div class="d-block d-sm-none visible-xxs">
     @Html.Action("Menu", "Nav", new { stage = Model.CurrentStage, horizontalLayout = true, abbreviationsMenu = true })
 </div>
-<div class="visible-xs hidden-xxs">
+<div class="d-block d-sm-none hidden-xxs">
     @Html.Action("Menu", "Nav", new { stage = Model.CurrentStage, horizontalLayout = true })
 </div>
 <div class="col-xs-12 col-sm-10 col-md-7">
@@ -85,13 +87,13 @@
                 </tbody>
             </table>
         </div>
-        <div class="hidden-xs hidden-xxs btn-group pull-right">
+        <div class="d-none d-md-block hidden-xxs btn-group pull-right">
             @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", "Home", new { page = x, stage = Model.CurrentStage, curindex = 0 }), 11)
         </div>
-        <div class="visible-xs hidden-sm hidden-xxs btn-group pull-right">
+        <div class="d-block d-sm-none hidden-xxs btn-group pull-right">
             @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", "Home", new { page = x, stage = Model.CurrentStage, curindex = 0 }), 7)
         </div>
-        <div class="visible-xxs hidden-xs hidden-sm btn-group pull-right">
+        <div class="d-block d-sm-none visible-xxs btn-group pull-right">
             @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", "Home", new { page = x, stage = Model.CurrentStage, curindex = 0 }), 5)
         </div>
     </div>

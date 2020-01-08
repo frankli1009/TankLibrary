@@ -11,18 +11,18 @@
             <img class="imgdetail imgfloatright" src="@sImgSrc" />
         }
     }
-    <dl class="dl-horizontal">
+    <dl class="row">
         @foreach (var p in ViewData.ModelMetadata.Properties)
+        {
+            if (p.PropertyName == "Stage")
             {
-                if (p.PropertyName == "Stage")
-                {
-                <dt>@(p.DisplayName ?? p.PropertyName)</dt>
-                <dd>@(Consts.GetStage((int?)p.Model))</dd>
+                <dt class="col-sm-2">@(p.DisplayName ?? p.PropertyName)</dt>
+                <dd class="col-sm-10">@(Consts.GetStage((int?)p.Model))</dd>
             }
             else if (p.PropertyName != "Id" && p.PropertyName != "ImagePath" && p.PropertyName != "ImageFile")
             {
-                <dt>@(p.DisplayName ?? p.PropertyName)</dt>
-                <dd>@(p.Model == null ? "" : p.Model.ToString())</dd>
+                <dt class="col-sm-2">@(p.DisplayName ?? p.PropertyName)</dt>
+                <dd class="col-sm-10">@(p.Model == null ? "" : p.Model.ToString())</dd>
             }
         }
     </dl>
