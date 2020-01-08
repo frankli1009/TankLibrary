@@ -22,7 +22,7 @@
 <div class="d-block d-sm-none hidden-xxs">
     @Html.Action("Menu", "Nav", new { stage = Model.CurrentStage, horizontalLayout = true })
 </div>
-<div class="col-xs-12 col-sm-10 col-md-7">
+<div class="col-xs-12 col-sm-12 col-md-7">
 
     <div>
         <div class="table-responsive table-bordered">
@@ -99,7 +99,7 @@
     </div>
 
 </div>
-<div class="hidden-xs hidden-sm col-md-3 well">
+<div class="d-none d-md-block col-md-3 well">
     <div id="imganddesc_div">
         @Html.Partial("ImageAndDescription", selTank)
     </div>
