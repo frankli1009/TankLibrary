@@ -30,8 +30,15 @@ namespace TankLibrary.Domain.Concrete
             context.SaveChanges();
         }
 
-        public Tank Add(Tank entity)
+        public Tank Add(Tank entity, int maxRecordCount = 0)
         {
+            if (maxRecordCount > 0) 
+            {
+                if (Tanks.Count() >= maxRecordCount)
+                {
+                    throw new Exception("Max record count reached!");
+                }
+            }
             entity.Id = 0;
             var DbSet = context.Set<Tank>();
             Tank result = DbSet.Add(entity);
