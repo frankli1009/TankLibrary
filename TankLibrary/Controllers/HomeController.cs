@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using TankLibrary.Domain.Abstract;
 using TankLibrary.Domain.Entities;
+using TankLibrary.Domain.Common;
 using TankLibrary.Models;
 
 namespace TankLibrary.Controllers
@@ -188,7 +189,18 @@ namespace TankLibrary.Controllers
                 {
                     if (tank.Id == -1)
                     {
-                        tank = repository.Add(tank);
+                        if (repository.Tanks.Count() >= allowedRecordsMax)
+                        {
+                            return RedirectToAction("Index", new { showReset = -1, page = page });
+                        }
+                        try
+                        {
+                            tank = repository.Add(tank);
+                        }
+                        catch(MaxRecordCountReachedException e)
+                        {
+                            return RedirectToAction("Index", new { showReset = -1, page = page });
+                        }
                         return RedirectToAction("Index", "Home", new { stage = liststage, page = page, curindex = curindex, tankId = tank.Id });
                     }
                     else
