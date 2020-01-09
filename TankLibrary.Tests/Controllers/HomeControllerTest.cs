@@ -431,7 +431,7 @@ namespace TankLibrary.Tests.Controllers
             ViewResult result = (ViewResult)controller.Edit(tank, 3, 4, 5);
 
             // Assert - check that the tank hasn't been passed on to the dbcontext
-            mock.Verify(m => m.Add(It.IsAny<Tank>()), Times.Never());
+            mock.Verify(m => m.Add(It.IsAny<Tank>(), 0), Times.Never());
             mock.Verify(m => m.Update(It.IsAny<Tank>()), Times.Never());
 
             // Assert - check that the method is returning the default view
@@ -447,7 +447,7 @@ namespace TankLibrary.Tests.Controllers
         {
             // Arrange - mock ITankRepository
             Mock<ITankRepository> mock = new Mock<ITankRepository>();
-            mock.Setup(m => m.Add(It.IsAny<Tank>()))
+            mock.Setup(m => m.Add(It.IsAny<Tank>(), 0))
             .Returns(new Tank { Id = 1, Stage = 1, Name = "A1", ImageFile = "testFile", ImagePath = "testPath/", Description = "Desc for A1" });
             mock.Setup(m => m.Update(It.IsAny<Tank>()));
 
@@ -481,7 +481,7 @@ namespace TankLibrary.Tests.Controllers
             ActionResult result = (ActionResult)controller.Edit(tank, 3, 4, 5);
 
             // Assert - check that the tank has been passed on to the dbcontext once
-            mock.Verify(m => m.Add(It.IsAny<Tank>()), Times.Once());
+            mock.Verify(m => m.Add(It.IsAny<Tank>(), 0), Times.Once());
             mock.Verify(m => m.Update(It.IsAny<Tank>()), Times.Never());
 
             // Assert - check that the mothod is returning the RedirectToRouteResult
@@ -497,7 +497,7 @@ namespace TankLibrary.Tests.Controllers
 
             // Arrange - mock ITankRepository
             Mock<ITankRepository> mock = new Mock<ITankRepository>();
-            mock.Setup(m => m.Add(It.IsAny<Tank>()))
+            mock.Setup(m => m.Add(It.IsAny<Tank>(), 0))
             .Returns(tank);
             mock.Setup(m => m.Update(It.IsAny<Tank>()));
 
@@ -528,7 +528,7 @@ namespace TankLibrary.Tests.Controllers
             ActionResult result = (ActionResult)controller.Edit(tank, 1, 4, 5);
 
             // Assert - check that the tank has been passed on to the dbcontext once
-            mock.Verify(m => m.Add(It.IsAny<Tank>()), Times.Never());
+            mock.Verify(m => m.Add(It.IsAny<Tank>(), 0), Times.Never());
             mock.Verify(m => m.Update(It.IsAny<Tank>()), Times.Once());
 
             // Assert - check that the mothod is returning the RedirectToRouteResult
@@ -544,7 +544,7 @@ namespace TankLibrary.Tests.Controllers
 
             // Arrange - mock ITankRepository
             Mock<ITankRepository> mock = new Mock<ITankRepository>();
-            mock.Setup(m => m.Add(It.IsAny<Tank>()))
+            mock.Setup(m => m.Add(It.IsAny<Tank>(), 0))
             .Returns(tank);
             mock.Setup(m => m.Update(It.IsAny<Tank>()));
 
@@ -575,7 +575,7 @@ namespace TankLibrary.Tests.Controllers
             ViewResult result = (ViewResult)controller.Edit(tank, 1, 4, 5);
 
             // Assert - check that the tank hasn't been passed on to the dbcontext
-            mock.Verify(m => m.Add(It.IsAny<Tank>()), Times.Never());
+            mock.Verify(m => m.Add(It.IsAny<Tank>(), 0), Times.Never());
             mock.Verify(m => m.Update(It.IsAny<Tank>()), Times.Never());
 
             // Assert - check that the method is returning the default view
@@ -594,7 +594,7 @@ namespace TankLibrary.Tests.Controllers
 
             // Arrange - mock ITankRepository
             Mock<ITankRepository> mock = new Mock<ITankRepository>();
-            mock.Setup(m => m.Add(It.IsAny<Tank>()))
+            mock.Setup(m => m.Add(It.IsAny<Tank>(), 0))
             .Returns(tank);
             mock.Setup(m => m.Update(It.IsAny<Tank>()));
 
@@ -625,7 +625,7 @@ namespace TankLibrary.Tests.Controllers
             ViewResult result = (ViewResult)controller.Edit(tank, 1, 4, 5);
 
             // Assert - check that the tank hasn't been passed on to the dbcontext
-            mock.Verify(m => m.Add(It.IsAny<Tank>()), Times.Never());
+            mock.Verify(m => m.Add(It.IsAny<Tank>(), 0), Times.Never());
             mock.Verify(m => m.Update(It.IsAny<Tank>()), Times.Never());
 
             // Assert - check that the method is returning the default view
