@@ -36,7 +36,7 @@ namespace TankLibrary.Domain.Concrete
             {
                 if (Tanks.Count() >= maxRecordCount)
                 {
-                    throw new Exception("Max record count reached!");
+                    throw new MaxRecordCountReachedException();
                 }
             }
             entity.Id = 0;
