@@ -11,7 +11,7 @@ namespace TankLibrary.Domain.Abstract
     {
         IEnumerable<Tank> Tanks { get; }
         void Update(Tank tank);
-        Tank Add(Tank tank);
+        Tank Add(Tank tank, int maxRecordCount = 0);
         void Delete(int id);
         int ResetData(int idMax = 0);
     }
