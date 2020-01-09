@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TankLibrary.Domain.Abstract;
 using TankLibrary.Domain.Entities;
+using TankLibrary.Domain.Common;
 
 namespace TankLibrary.Domain.Concrete
 {
