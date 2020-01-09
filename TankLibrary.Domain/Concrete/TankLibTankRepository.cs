@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TankLibrary.Domain.Abstract;
 using TankLibrary.Domain.Entities;
+using TankLibrary.Domain.Common;
 
 namespace TankLibrary.Domain.Concrete
 {
@@ -30,8 +31,15 @@ namespace TankLibrary.Domain.Concrete
             context.SaveChanges();
         }
 
-        public Tank Add(Tank entity)
+        public Tank Add(Tank entity, int maxRecordCount = 0)
         {
+            if (maxRecordCount > 0) 
+            {
+                if (Tanks.Count() >= maxRecordCount)
+                {
+                    throw new MaxRecordCountReachedException();
+                }
+            }
             entity.Id = 0;
             var DbSet = context.Set<Tank>();
             Tank result = DbSet.Add(entity);
