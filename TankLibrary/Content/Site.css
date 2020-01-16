@@ -293,7 +293,7 @@ h3.warning {
 #navbarSupportedContent .navbar-nav {
     text-align: right;
 }
-.navbar-nav > .nav-item > a {
+.navbar-nav > .nav-item > a, .navbar-nav > .nav-item > span {
     padding-top: 10px;
     padding-bottom: 10px;
     line-height: 20px;
@@ -403,6 +403,24 @@ button.navbar-toggler > .fa.fa-bars {
     content: none;
 }
 
+div.rows-center {
+    margin: auto;
+}
+
+dd {
+    margin-bottom: 0 !important;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+dt {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
 @media(min-width:768px) {
     .navbar-fixed-top, .navbar-fixed-bottom {
         border-radius: 0
@@ -411,7 +429,8 @@ button.navbar-toggler > .fa.fa-bars {
 
 .navbar-fixed-top {
     top: 0;
-    z-index: 1030
+    z-index: 1030;
+    width: 100%;
 }
 
 .navbar-fixed-bottom {

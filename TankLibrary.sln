@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TankLibrary", "TankLibrary\TankLibrary.csproj", "{E869BCB1-F7F5-4FF0-A45E-30F5BE840630}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TankLibrary.Tests", "TankLibrary.Tests\TankLibrary.Tests.csproj", "{81FA5440-30AE-4657-B00F-C7BA05E35AA0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TankLibrary.Domain", "TankLibrary.Domain\TankLibrary.Domain.csproj", "{51D69703-438C-43E3-8538-97DD7A543A72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TankLibrary.UserIdentity", "UserIdentity\TankLibrary.UserIdentity.csproj", "{40FB8085-E56C-427D-B36D-5449FA6BF4CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,8 +29,15 @@ Global
 		{51D69703-438C-43E3-8538-97DD7A543A72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51D69703-438C-43E3-8538-97DD7A543A72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51D69703-438C-43E3-8538-97DD7A543A72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40FB8085-E56C-427D-B36D-5449FA6BF4CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40FB8085-E56C-427D-B36D-5449FA6BF4CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40FB8085-E56C-427D-B36D-5449FA6BF4CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40FB8085-E56C-427D-B36D-5449FA6BF4CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2DBBD05-8C63-4BEB-8C8B-BA620E183566}
 	EndGlobalSection
 EndGlobal

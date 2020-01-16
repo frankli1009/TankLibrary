@@ -9,6 +9,8 @@ using TankLibrary.Domain.Abstract;
 using TankLibrary.Domain.Entities;
 using TankLibrary.Domain.Common;
 using TankLibrary.Models;
+using TankLibrary.UserIdentity.Extensions;
+using TankLibrary.UserIdentity.Managers;
 
 namespace TankLibrary.Controllers
 {
@@ -140,6 +142,7 @@ namespace TankLibrary.Controllers
             return View(tank);
         }
 
+        [AuthorizeRoles(ConstValue.Role_User)]
         [HttpGet]
         public ActionResult Edit(int? id, int? liststage, int page, int curindex)
         {
@@ -179,6 +182,7 @@ namespace TankLibrary.Controllers
             return View(tank);
         }
 
+        [AuthorizeRoles(ConstValue.Role_User)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Tank tank, int? liststage, int page, int curindex)
@@ -197,7 +201,7 @@ namespace TankLibrary.Controllers
                         {
                             tank = repository.Add(tank);
                         }
-                        catch(MaxRecordCountReachedException e)
+                        catch(MaxRecordCountReachedException)
                         {
                             return RedirectToAction("Index", new { showReset = -1, page = page });
                         }
@@ -256,6 +260,7 @@ namespace TankLibrary.Controllers
             return true;
         }
 
+        [AuthorizeRoles(ConstValue.Role_User)]
         [HttpGet]
         public ActionResult Delete(int? id, int? liststage, int page, int curindex)
         {
@@ -277,6 +282,7 @@ namespace TankLibrary.Controllers
             return View(tank);
         }
 
+        [AuthorizeRoles(ConstValue.Role_User)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id, int? liststage, int page, int curindex)
