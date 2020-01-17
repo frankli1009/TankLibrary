@@ -8,7 +8,7 @@ using TankLibrary.Domain.Concrete;
 
 namespace TankLibrary.Controllers
 {
-    public class NavController : Controller
+    public class NavController : BaseController
     {
         private ITankRepository repository;
 

@@ -12,8 +12,7 @@ namespace TankLibrary.UserIdentity.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            ContextKey = "UserIdentity.Models.UserIdentityDbContext";
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(TankLibrary.UserIdentity.Models.UserIdentityDbContext context)
@@ -23,7 +22,7 @@ namespace TankLibrary.UserIdentity.Migrations
                 new IdentityRole { Name = ConstValue.Role_Admin },
                 new IdentityRole { Name = ConstValue.Role_User });
 
-            if (context.Set<ApplicationUser>().Any(u => u.Email == ConstValue.User_Admin) 
+            if (context.Set<ApplicationUser>().Any(u => u.Email == ConstValue.User_Admin)
                 && context.Set<IdentityRole>().Any(r => r.Name == ConstValue.Role_Admin)
                 && context.Set<IdentityRole>().Any(r => r.Name == ConstValue.Role_User))
             {

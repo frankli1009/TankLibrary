@@ -16,7 +16,7 @@ using TankLibrary.UserIdentity.ViewModels;
 namespace TankLibrary.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -184,10 +184,15 @@ namespace TankLibrary.Controllers
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    if (!(await sendConfirmationEmail(user)))
+                    try 
+                    { 
+                        await sendConfirmationEmail(user); 
+                    }
+                    catch (Exception e)
                     {
                         this.DbContext.Users.Remove(user);
                         this.DbContext.SaveChanges();
+                        throw e;
                     }
 
                     return RedirectToAction("Confirm", "Account", new { Email = user.Email });
@@ -201,21 +206,13 @@ namespace TankLibrary.Controllers
             return View(model);
         }
 
-        private async Task<bool> sendConfirmationEmail(ApplicationUser user)
+        private async Task sendConfirmationEmail(ApplicationUser user)
         {
             // Send an email with this link
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
             string body = string.Format("Dear {0}<BR/>Thank you for your registration, please confirm your account by clicking <a href=\"{1}\">here</a>", user.UserName, callbackUrl);
-            try
-            {
-                await UserManager.SendEmailAsync(user.Id, "Confirm your account", body);
-                return true;
-            }
-            catch(Exception)
-            {
-                return false;
-            }
+            await UserManager.SendEmailAsync(user.Id, "Confirm your account", body);
         }
 
 
@@ -283,7 +280,7 @@ namespace TankLibrary.Controllers
                 this.DbContext.Set<IdentityUserRole>().Add(new IdentityUserRole
                 {
                     UserId = userId,
-                    RoleId = this.DbContext.Set<IdentityRole>().Where(r => r.Name == ConstValue.Role_Admin).FirstOrDefault().Id
+                    RoleId = this.DbContext.Set<IdentityRole>().Where(r => r.Name == ConstValue.Role_User).FirstOrDefault().Id
                 });
                 this.DbContext.SaveChanges();
             }

@@ -14,7 +14,7 @@ using TankLibrary.UserIdentity.Managers;
 
 namespace TankLibrary.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private ITankRepository repository;
         public int PageSize = 10;

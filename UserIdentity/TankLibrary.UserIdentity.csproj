@@ -108,9 +108,9 @@
     <Compile Include="Managers\ApplicationRoleManager.cs" />
     <Compile Include="Managers\ApplicationSignInManager.cs" />
     <Compile Include="Managers\ConstValue.cs" />
-    <Compile Include="Migrations\202001160829198_AddApplicationUser.cs" />
-    <Compile Include="Migrations\202001160829198_AddApplicationUser.Designer.cs">
-      <DependentUpon>202001160829198_AddApplicationUser.cs</DependentUpon>
+    <Compile Include="Migrations\202001171408110_Initial.cs" />
+    <Compile Include="Migrations\202001171408110_Initial.Designer.cs">
+      <DependentUpon>202001171408110_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -137,8 +137,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001160829198_AddApplicationUser.resx">
-      <DependentUpon>202001160829198_AddApplicationUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001171408110_Initial.resx">
+      <DependentUpon>202001171408110_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

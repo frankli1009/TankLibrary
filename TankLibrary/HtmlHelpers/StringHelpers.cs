@@ -10,7 +10,7 @@ namespace TankLibrary.HtmlHelpers
     {
         public static string AdjustString(this HtmlHelper html, string src, int stringLen, string suffix = "...")
         {
-            return src.AdjustString(stringLen, suffix);
+            return src == null? src : src.AdjustString(stringLen, suffix);
         }
 
         public static string AdjustString(this string src, int stringLen, string suffix = "...")
