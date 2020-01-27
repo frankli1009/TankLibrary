@@ -19,12 +19,15 @@ namespace TankLibrary.Domain.Entities
         [Required]
         public string Type { get; set; }
 
+        [Display(Name= "Place of origin")]
         public string PlaceOfOrigin { get; set; }
 
         public string Manufacturer { get; set; }
 
+        [Display(Name = "Service start year")]
         public int? ServiceStartYear { get; set; }
 
+        [Display(Name = "Service end year")]
         public int? ServiceEndYear { get; set; }
 
         [Column(TypeName = "numeric")]
@@ -43,8 +46,10 @@ namespace TankLibrary.Domain.Entities
 
         public string Armor { get; set; }
 
+        [Display(Name = "Main armament")]
         public string MainArmament { get; set; }
 
+        [Display(Name = "Secondary armament")]
         public string SecondaryArmament { get; set; }
 
         public string Engine { get; set; }
@@ -56,9 +61,11 @@ namespace TankLibrary.Domain.Entities
 
         public string Suspension { get; set; }
 
+        [Display(Name = "Ground clearance")]
         [Column(TypeName = "numeric")]
         public decimal? GroundClearance { get; set; }
 
+        [Display(Name = "Fuel capacity")]
         [Column(TypeName = "numeric")]
         public decimal? FuelCapacity { get; set; }
 
