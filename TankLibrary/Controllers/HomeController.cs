@@ -172,7 +172,8 @@ namespace TankLibrary.Controllers
                 tank = tanks.ElementAt(0);
             }
 
-            if (tank.Id > 0 && tank.Id <= defaultIdMax)
+            bool adminUser = User.IsInRole(ConstValue.Role_Admin);
+            if ((tank.Id > 0 && tank.Id <= defaultIdMax) && !adminUser)
             {
                 return RedirectToAction("Detail", new { id = tank.Id, liststage = liststage, page = page, curindex = curindex, fromEdit = true });
             }
